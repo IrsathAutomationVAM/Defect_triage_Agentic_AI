@@ -21,3 +21,24 @@ def test_triage_defect_returns_expected_fields():
     assert isinstance(result["missing_information"], list)
     assert 0.0 <= result["confidence_score"] <= 1.0
     assert isinstance(result["needs_human_review"], bool)
+
+
+def test_triage_defect_returns_agentic_execution_sequence():
+    defect = {
+        "bug_description": "Checkout page shows a 500 after payment confirmation.",
+        "logs": "Traceback: internal error in checkout confirm endpoint",
+        "screenshot_notes": "User sees a blank confirmation screen",
+        "additional_comments": "Affects customers in production",
+    }
+
+    result = triage_defect(defect)
+
+    assert result["execution_sequence"] == [
+        "Observation",
+        "Defect Analysis",
+        "Classification",
+        "Missing Information Detection",
+        "Confidence Calculation",
+        "Human Review Gate",
+        "Final Triage Output",
+    ]

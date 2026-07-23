@@ -15,13 +15,27 @@ The project uses Python and can work with Ollama via the `qwen2:7b` model when a
 ## Project Structure
 
 - `agent.py` - entry point for running the agent
-- `workflow.py` - triage workflow, Ollama integration, and fallback logic
+- `workflow.py` - triage workflow, Ollama integration, and the agentic node pipeline
 - `prompts.py` - prompt construction for the LLM
 - `schemas.py` - input/output data models
 - `sample_defects.json` - sample defect payloads for testing
 - `tests/test_agent.py` - regression test for the triage output contract
 - `run_agent.cmd` - Windows Command Prompt launcher
 - `run_agent.ps1` - Windows PowerShell launcher
+
+## Agentic Workflow Nodes
+
+The solution now follows a seven-node agentic flow that mirrors a reasoning pipeline:
+
+1. Observation
+2. Defect Analysis
+3. Classification
+4. Missing Information Detection
+5. Confidence Calculation
+6. Human Review Gate
+7. Final Triage Output
+
+Each run returns an `execution_sequence` field so you can see the exact node order that produced the final decision.
 
 ## Prerequisites
 
@@ -102,7 +116,16 @@ Example output:
   "suggested_owner": "payments team",
   "missing_information": [],
   "confidence_score": 0.78,
-  "needs_human_review": true
+  "needs_human_review": true,
+  "execution_sequence": [
+    "Observation",
+    "Defect Analysis",
+    "Classification",
+    "Missing Information Detection",
+    "Confidence Calculation",
+    "Human Review Gate",
+    "Final Triage Output"
+  ]
 }
 ```
 

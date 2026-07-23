@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass, field
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 
 
 @dataclass
@@ -33,6 +33,7 @@ class DefectTriageResult:
     missing_information: List[str] = field(default_factory=list)
     confidence_score: float = 0.0
     needs_human_review: bool = True
+    execution_sequence: List[str] = field(default_factory=list)
 
     def to_dict(self) -> Dict[str, Any]:
         return asdict(self)
@@ -47,4 +48,5 @@ class DefectTriageResult:
             missing_information=list(payload.get("missing_information", []) or []),
             confidence_score=float(payload.get("confidence_score", 0.0)),
             needs_human_review=bool(payload.get("needs_human_review", True)),
+            execution_sequence=list(payload.get("execution_sequence", []) or []),
         )

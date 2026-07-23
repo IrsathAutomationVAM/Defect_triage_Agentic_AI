@@ -1,14 +1,32 @@
 [
   {
-    "bug_description": "Checkout button fails for guest users after payment confirmation.",
-    "logs": "Error: 500 Internal Server Error at /checkout/confirm",
-    "screenshot_notes": "Button remains disabled after payment screen.",
-    "additional_comments": "Reported by customer after latest release."
+    "bug_description": "Login failure after entering valid credentials on the web app.",
+    "logs": "Authentication failed: invalid session token returned by identity service",
+    "screenshot_notes": "User is redirected back to the login screen with an error banner",
+    "additional_comments": "Reported by multiple users during morning peak traffic"
   },
   {
-    "bug_description": "Login page returns a timeout for SSO users.",
-    "logs": "Timeout waiting for identity provider response",
-    "screenshot_notes": "Spinner remains visible indefinitely",
-    "additional_comments": "Affects new sign-ins only"
+    "bug_description": "Checkout payment failure when submitting a card payment for an order.",
+    "logs": "Payment gateway timeout: 504 Gateway Timeout at /checkout/confirm",
+    "screenshot_notes": "Order summary shows a pending payment state and no confirmation page",
+    "additional_comments": "Customers are unable to complete purchases"
+  },
+  {
+    "bug_description": "Password reset email link does not work for newly registered users.",
+    "logs": "Reset token validation error: link expired before use",
+    "screenshot_notes": "Password reset page shows an expired link message",
+    "additional_comments": "Issue is affecting self-service recovery"
+  },
+  {
+    "bug_description": "Search results page is slow and times out for common product queries.",
+    "logs": "Search query exceeded 15 seconds and returned a timeout exception",
+    "screenshot_notes": "Spinner remains active and the page eventually shows an error state",
+    "additional_comments": "Performance regression noticed after search index update"
+  },
+  {
+    "bug_description": "Profile save error when updating email and phone number.",
+    "logs": "Validation error: profile update request failed with 500 Internal Server Error",
+    "screenshot_notes": "Save button stays enabled while a red error message appears",
+    "additional_comments": "Users cannot persist profile changes"
   }
 ]
