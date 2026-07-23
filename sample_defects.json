@@ -1,0 +1,14 @@
+[
+  {
+    "bug_description": "Checkout button fails for guest users after payment confirmation.",
+    "logs": "Error: 500 Internal Server Error at /checkout/confirm",
+    "screenshot_notes": "Button remains disabled after payment screen.",
+    "additional_comments": "Reported by customer after latest release."
+  },
+  {
+    "bug_description": "Login page returns a timeout for SSO users.",
+    "logs": "Timeout waiting for identity provider response",
+    "screenshot_notes": "Spinner remains visible indefinitely",
+    "additional_comments": "Affects new sign-ins only"
+  }
+]
